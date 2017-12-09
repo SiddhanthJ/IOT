@@ -28,9 +28,17 @@ while True:
     cv2.imshow('gray',gray)
     out.write(frame)#opens the gray frame declared earlier with title gray
     
+    
     if cv2.waitKey(2) & 0xFF==ord('q'):#if wait key is not declared the frame is opened but not seen.
         break
 
 cap.release()
 out.release()
 cv2.destroyAllWindows()
+count=len(rects)
+    print ("no of cats" )
+    print (count)
+    firebase = firebase.FirebaseApplication('https://iot-demo-2eb5f.firebaseio.com/')
+    data = {'Cats':count}
+    result = firebase.put('https://iot-demo-2eb5f.firebaseio.com/','/Count',data)
+    print(result)
